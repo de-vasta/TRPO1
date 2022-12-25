@@ -1,0 +1,16 @@
+﻿@page "/"
+<PageTitle>Home</PageTitle>
+
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" @bind="@IsChecked">
+    <label class="form-check-label" for="flexSwitchCheckDefault">Use Generic</label>
+</div>
+
+<hr>
+
+
+
+@code
+{
+    public bool IsChecked { get; set; } = false;
+}
