@@ -1,2 +1,67 @@
 @page "/non-generic"
 @page "/nongeneric"
+
+@using Models
+
+<PageTitle>Generic</PageTitle>
+<form>
+    <div class="form-row">
+        <div class="col-8">
+            <div class="input-group">
+                <input class="form-control" placeholder="Name" @bind-value="@Name" />
+                <select class="form-select" @bind="@Type">
+                    <option selected hidden>Vehicle Type...</option>
+                    @foreach (var type in Enum.GetValues<VehicleType>())
+                    {
+                        <option value="@((int)type)" @key="@((int)type)">@type</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4 mt-3">
+        <div class="input-group">
+            <input type="number" class="form-control" id="max-speed" @bind-value="@MaxSpeed" data-toggle="tooltip"
+                title="Max Speed (kmph)" />
+            <div class="input-group-prepend">
+                <div class="input-group-text">Max Speed (kmph)</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <button type="button" class="btn btn-success" @onclick="@AddNewVehicle"><span
+            class="oi oi-plus"></span>&ensp;Add</button>
+    <hr>
+</form>
+
+<div>
+    @foreach (var item in _vehicles)
+    {
+        <p>@item.ToString()</p>
+    }
+</div>
+
+@code
+{
+    VehicleCollection.NonGeneric _vehicles = new();
+
+    string? Name { get; set; }
+    int MaxSpeed { get; set; } = 0;
+    VehicleType? Type { get; set; }
+
+    void AddNewVehicle()
+    {
+        if (!String.IsNullOrWhiteSpace(Name) && Type != null)
+        {
+            _vehicles.Add(Name, Type switch
+            {
+                VehicleType.Air => new Plane(Name, MaxSpeed),
+                VehicleType.Ground => new Car(Name, MaxSpeed),
+                VehicleType.Water => new Ship(Name, MaxSpeed),
+                _ => new Car("Watta heck!?", int.MaxValue)
+            });
+        }
+    }
+}

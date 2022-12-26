@@ -10,9 +10,11 @@ static class VehicleCollection
 
         public object this[int key]
         {
-            get => Vehicles[key]!;
+            get => Vehicles[key] ?? new Car("Wth?!", 9779);
             set => Vehicles[key] = value;
         }
+
+        public int Length => Vehicles.Count;
 
         public void Add(object key, object value) => Vehicles.Add(key, value);
 
@@ -28,6 +30,8 @@ static class VehicleCollection
             get => Vehicles[key];
             set => Vehicles[key] = value;
         }
+
+        public int Length => Vehicles.Count;
 
         public void Add(TKey key, Vehicle value) => Vehicles.Add(key, value);
 
