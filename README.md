@@ -3,4 +3,4 @@
 ## Тема: Робота з колекціями.
 
 ### Варіант № 2 (12)
-Реалізувати клас VehicleCollection для зберігання колекції об'єктів `Plain`, `Car`, `Ship` використовуючи клас `SortedList` і `SortedList<T>`.\
+Реалізувати клас `VehicleCollection` для зберігання колекції об'єктів `Plane`, `Car`, `Ship` використовуючи клас `SortedList` і `SortedList<T>`.
